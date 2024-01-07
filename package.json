@@ -1,5 +1,6 @@
 {
   "name": "nf-todo-app",
+  "homepage": "https://nicodee.github.io/nf-todo-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +12,7 @@
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "antd": "^5.12.7",
+    "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
@@ -19,7 +21,9 @@
     "web-vitals": "^2.1.4",
     "zustand": "^4.4.7"
   },
-  "scripts": {
+  "scripts": { 
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
