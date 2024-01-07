@@ -3,13 +3,33 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import ErrorPage from './error-page';
+import { CompletedTasks, IncompleteTasks } from './Containers';
 
+const router = createBrowserRouter([
+  {
+    path: '/*',
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'incomplete',
+        element: <IncompleteTasks />,
+      },
+      {
+        path: 'complete',
+        element: <CompletedTasks />,
+      },
+    ]
+  },
+]);
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

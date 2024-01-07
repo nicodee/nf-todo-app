@@ -1,12 +1,17 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback } from 'react';
 import { TaskType } from '../types';
+import { useStore } from '../store';
 
-export const TaskItem = ({ task }: { task: TaskType }) => {
-  const [checked, setChecked] = useState<boolean>(task.completed);
+export const TaskItem = memo(({ task }: { task: TaskType }) => {
+  const { markTaskAsCompleted, markTaskAsActive } = useStore();
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.target.checked);
-  }, []);
+    if (e.target.checked) {
+      markTaskAsCompleted(task.id);
+    } else {
+      markTaskAsActive(task.id);
+    }
+  }, [markTaskAsActive, markTaskAsCompleted, task.id]);
 
   return (
     <p>
@@ -16,10 +21,10 @@ export const TaskItem = ({ task }: { task: TaskType }) => {
         id={task.id}
         name={task.id}
         value={task.completed.toString()}
-        checked={checked}
+        checked={task.completed}
         onChange={handleChange}
       />
       <label htmlFor={task.id}>{task.title}</label>
     </p>
   );
-};
+});
