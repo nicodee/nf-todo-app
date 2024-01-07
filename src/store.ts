@@ -6,7 +6,8 @@ type  Store = {
   tasks: Tasks;
   addTask: (newTask:TaskType) => void;
   clearCompletedTasks: () => void;
-  completedTasks: () => [string, TaskType][];
+  deleteTask: (taskId: string) => void;
+  editTask: (taskId: string, newTaskTitle: string) => void;
   markTaskAsCompleted: (taskId: string) => void;
   markTaskAsActive: (taskId: string) => void;
 };
@@ -21,7 +22,11 @@ export const useStore = create(
           Object.entries(state.tasks).filter(([_, task]) => !task.completed)
         )
       })),
-      completedTasks: () => Object.entries(get().tasks).filter(([_, task]) => !task.completed),
+      deleteTask: (taskId: string) => set((state) => ({
+        tasks: Object.fromEntries(
+          Object.entries(state.tasks).filter(([id, _]) => id !== taskId)
+        )
+      })),
       editTask: (taskId: string, newTaskTitle: string) => set(
         (state) => ({ 
           tasks: { ...state.tasks, [taskId]: { ...state.tasks[taskId], title: newTaskTitle }}

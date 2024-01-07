@@ -1,6 +1,5 @@
 import { memo, useCallback, useState } from 'react';
 import { useStore } from '../store';
-import { Outlet } from 'react-router-dom';
 
 
 export const TaskInput = memo(function TaskInput() {
@@ -51,7 +50,6 @@ export const TaskInput = memo(function TaskInput() {
       <button data-testid="add-task-button" onClick={handleClick} disabled={!task}>
         Add Task
       </button>
-      <Outlet/>
     </div>
   );
 });

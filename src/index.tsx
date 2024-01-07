@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ErrorPage from './error-page';
-import { CompletedTasks, IncompleteTasks } from './Containers';
+import { CompletedTasks, ActiveTasks } from './Containers';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +14,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'incomplete',
-        element: <IncompleteTasks />,
+        path: 'active',
+        element: <ActiveTasks />,
       },
       {
         path: 'complete',
