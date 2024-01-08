@@ -1,24 +1,41 @@
-import React from 'react';
 import './App.css';
 import { TaskInput } from './Components/TaskInput';
 import { Footer } from './Components/Footer';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import { AllTasks, CompletedTasks, ActiveTasks } from './Containers';
 import { Nav } from './Components/Nav';
+import NoMatch from './NoMatch';
 
 function App() {
   return (
-      <div>
-        <h1>Todo app</h1>
-        <TaskInput />
-        <Nav />
-        <Routes>
-          <Route path="/" element={<AllTasks/>} />
+    <div>
+      <Routes>
+        <Route
+          element={
+            <>
+              <h1>Todo app</h1>
+              <TaskInput />
+              <Nav />
+              <Outlet />
+              <Footer />
+            </>
+          }
+        >
+          <Route
+            path="/"
+            element={
+              <>
+                <AllTasks />
+                <Outlet />
+              </>
+            }
+          />
           <Route path="/active" element={<ActiveTasks />} />
           <Route path="/complete" element={<CompletedTasks />} />
-        </Routes>
-        <Footer/>
-      </div>
+        </Route>
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
+    </div>
   );
 }
 

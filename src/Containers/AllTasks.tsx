@@ -1,14 +1,14 @@
-import { memo } from "react";
-import { TaskList } from "../Components/TaskList";
-import { useStore } from "../store";
+import { memo } from 'react';
+import { TaskList } from '../Components/TaskList';
+import { useStore } from '../store';
 
 export const AllTasks = memo(function AllTasks() {
-    const { tasks } = useStore();
+  const { tasks } = useStore();
 
-    return (
-        <div>
-        <h1>All tasks</h1>
-        <TaskList tasks={tasks} />
-        </div>
-    );
-})
+  return (
+    <div>
+      <h1>All tasks</h1>
+      <TaskList tasks={tasks} />
+    </div>
+  );
+});

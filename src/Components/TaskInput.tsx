@@ -1,22 +1,21 @@
 import { memo, useCallback, useState } from 'react';
 import { useStore } from '../store';
 
-
 export const TaskInput = memo(function TaskInput() {
-  const {addTask} = useStore();
+  const { addTask } = useStore();
   const [task, setTask] = useState<string>('');
 
   const handleAddTask = useCallback(
     (task: string) => {
-      addTask({ 
+      addTask({
         id: Date.now().toString(),
-        title: task, 
-        completed: false 
+        title: task,
+        completed: false,
       });
     },
     [addTask],
   );
-  
+
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setTask(event.target.value);
   }, []);
@@ -26,7 +25,6 @@ export const TaskInput = memo(function TaskInput() {
     handleAddTask(task);
     setTask('');
   }, [handleAddTask, task]);
-
 
   const handleKeyUp = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {

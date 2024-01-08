@@ -6,13 +6,16 @@ export const TaskItem = memo(function TaskItem({ task }: { task: TaskType }) {
   const { deleteTask, markTaskAsCompleted, markTaskAsActive } = useStore();
   const [editMode, setEditMode] = useState(false);
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      markTaskAsCompleted(task.id);
-    } else {
-      markTaskAsActive(task.id);
-    }
-  }, [markTaskAsActive, markTaskAsCompleted, task.id]);
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.checked) {
+        markTaskAsCompleted(task.id);
+      } else {
+        markTaskAsActive(task.id);
+      }
+    },
+    [markTaskAsActive, markTaskAsCompleted, task.id],
+  );
 
   const handleToggleEditMode = useCallback(() => {
     setEditMode(prev => !prev);
@@ -22,11 +25,8 @@ export const TaskItem = memo(function TaskItem({ task }: { task: TaskType }) {
     window.confirm('Are you sure you want to delete this task?') && deleteTask(task.id);
   }, [deleteTask, task.id]);
 
-
   if (editMode) {
-    return (
-      <EditTask task={task} toggleEditMode={handleToggleEditMode}/>
-    )
+    return <EditTask task={task} toggleEditMode={handleToggleEditMode} />;
   }
 
   return (
@@ -51,7 +51,6 @@ export const TaskItem = memo(function TaskItem({ task }: { task: TaskType }) {
   );
 });
 
-
 const EditTask = memo(function EditTask({ task, toggleEditMode }: { task: TaskType; toggleEditMode: () => void }) {
   const { editTask } = useStore();
   const [newTask, setTask] = useState<string>(task.title);
@@ -61,11 +60,10 @@ const EditTask = memo(function EditTask({ task, toggleEditMode }: { task: TaskTy
       alert('Task cannot be empty');
       toggleEditMode();
       return;
-    };
-    editTask( task.id, newTask);
+    }
+    editTask(task.id, newTask);
     toggleEditMode();
   }, [editTask, newTask, task.id, toggleEditMode]);
-
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setTask(e.target.value);
@@ -98,5 +96,5 @@ const EditTask = memo(function EditTask({ task, toggleEditMode }: { task: TaskTy
         <button onClick={handleSaveEditedTask}>Save</button>
       </span>
     </p>
-  )
+  );
 });
