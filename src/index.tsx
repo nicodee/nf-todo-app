@@ -26,7 +26,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: process.env.PUBLIC_URL === 'production' ? '/nf-todo-app' : '',
+    basename: '/nf-todo-app',
   },
 );
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
