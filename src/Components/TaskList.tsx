@@ -2,7 +2,7 @@ import { memo } from "react";
 import { Tasks } from "../types";
 import { TaskItemContainer } from "./TaskItem";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { StyledListWrapper, StyledScrollableDiv } from "../styles";
+import { StyledScrollableDiv } from "../styles";
 import { Flex } from "antd";
 
 const EmptyList = () => (
@@ -20,13 +20,11 @@ export const TaskList = memo(function TaskList({ tasks }: { tasks: Tasks }) {
   return (
     <>
       {_tasks.length > 0 && (
-        <StyledListWrapper>
-          <StyledScrollableDiv ref={parent}>
-            {_tasks.map(([taskId, task]) => {
-              return <TaskItemContainer task={task} key={taskId} />;
-            })}
-          </StyledScrollableDiv>
-        </StyledListWrapper>
+        <StyledScrollableDiv ref={parent}>
+          {_tasks.map(([taskId, task]) => {
+            return <TaskItemContainer task={task} key={taskId} />;
+          })}
+        </StyledScrollableDiv>
       )}
     </>
   );

@@ -23,12 +23,11 @@ export const StyledCreateTaskInput = styles(Input)`
 `;
 
 export const StyledListWrapper = styles.div`
-  overflow: hidden;
-  max-height: calc(100vh - 340px);
+
 `;
 
 export const StyledScrollableDiv = styles.div`
-  height: -webkit-fill-available;
+  height: 100%;
   overflow-y: scroll;
 `;
 
@@ -101,6 +100,11 @@ export const StyledList = styles(List)`
   @media (max-width: 425px) {
     width: 350px;
     border: none;
+  }
+
+  .ant-spin-container {
+    overflow: auto;
+    max-height: calc(100vh - 340px);
   }
 `;
 
