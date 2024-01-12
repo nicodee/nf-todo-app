@@ -3,12 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import ErrorPage from "./error-page";
 import { CompletedTasks, ActiveTasks } from "./Containers";
 import NoMatch from "./NoMatch";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   [
     {
       path: "/*",
