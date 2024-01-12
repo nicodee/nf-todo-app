@@ -3,8 +3,10 @@ import { StyledList, StyledTitle } from "../styles";
 import { Layout, Typography } from "antd";
 import { Header } from "../Components/Header";
 import { ClearTasksButton } from "../Components/ClearTasksButton";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export default function LayoutWrapper() {
+  const [parent] = useAutoAnimate();
   return (
     <Layout>
       <Layout.Content>
@@ -17,7 +19,9 @@ export default function LayoutWrapper() {
           footer={<ClearTasksButton />}
           size="large"
         >
-          <Outlet />
+          <span ref={parent}>
+            <Outlet />
+          </span>
         </StyledList>
       </Layout.Content>
     </Layout>

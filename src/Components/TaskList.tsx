@@ -3,11 +3,19 @@ import { Tasks } from "../types";
 import { TaskItemContainer } from "./TaskItem";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { StyledScrollableDiv } from "../styles";
-import { Flex } from "antd";
+import { Empty, Flex } from "antd";
 
 const EmptyList = () => (
-  <Flex justify="center" align="center">
-    <p>No tasks to display</p>
+  <Flex
+    justify="center"
+    align="center"
+    gap={20}
+    vertical
+    style={{
+      margin: "20px auto",
+    }}
+  >
+    <Empty description="" />
   </Flex>
 );
 
@@ -15,17 +23,14 @@ export const TaskList = memo(function TaskList({ tasks }: { tasks: Tasks }) {
   const _tasks = Object.entries(tasks);
   const [parent] = useAutoAnimate();
 
-  if (_tasks.length === 0) return <EmptyList />;
-
   return (
     <>
-      {_tasks.length > 0 && (
-        <StyledScrollableDiv ref={parent}>
-          {_tasks.map(([taskId, task]) => {
-            return <TaskItemContainer task={task} key={taskId} />;
-          })}
-        </StyledScrollableDiv>
-      )}
+      <StyledScrollableDiv ref={parent}>
+        {_tasks.length === 0 && <EmptyList />}
+        {_tasks.map(([taskId, task]) => {
+          return <TaskItemContainer task={task} key={taskId} />;
+        })}
+      </StyledScrollableDiv>
     </>
   );
 });
