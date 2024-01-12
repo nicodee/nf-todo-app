@@ -6,14 +6,17 @@ import { StyledNavButton } from "../styles";
 
 const NavButton = memo(function NavButton({
   children,
+  dataTestId,
   to,
 }: {
   children: React.ReactNode;
+  dataTestId: string;
   to: string;
 }) {
   return (
     <StyledNavButton>
       <NavLink
+        data-testid={dataTestId}
         className={navData => (navData.isActive ? "active" : "")}
         to={to}
       >
@@ -36,17 +39,17 @@ export const Nav = memo(function Nav() {
 
   return (
     <Flex gap={10} wrap="wrap">
-      <NavButton to={`/`}>
+      <NavButton to={`/`} dataTestId="nav-button-all">
         <Button type="primary" className="all">
           All Tasks: {allTasks}
         </Button>
       </NavButton>
-      <NavButton to={`/active`}>
+      <NavButton to={`/active`} dataTestId="nav-button-incomplete">
         <Button type="primary" className="active">
           Incomplete: {activeTasks}
         </Button>
       </NavButton>
-      <NavButton to={`/complete`}>
+      <NavButton to={`/complete`} dataTestId="nav-button-completed">
         <Button type="primary" className="completed">
           Completed: {completeTasks}
         </Button>

@@ -58,7 +58,7 @@ export const TaskItemContainer = memo(function TaskItemContainer({
   }, [editMode, handleDeleteTask, handleToggleEditMode]);
 
   return (
-    <StyledListItem actions={actions}>
+    <StyledListItem actions={actions} data-testid="task-list-item">
       {editMode ? (
         <EditTask
           task={task}

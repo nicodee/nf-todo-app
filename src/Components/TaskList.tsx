@@ -7,6 +7,7 @@ import { Empty, Flex } from "antd";
 
 const EmptyList = () => (
   <Flex
+    data-testid="empty-list-icon"
     justify="center"
     align="center"
     gap={20}

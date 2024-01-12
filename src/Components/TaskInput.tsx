@@ -83,6 +83,7 @@ export const TaskInput = memo(function TaskInput() {
 
       {!inputFocused && (
         <StyledFloatButton
+          data-testid="add-new-task-button"
           type="primary"
           icon={<PlusOutlined />}
           onClick={handleFocusInput}
