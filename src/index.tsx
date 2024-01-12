@@ -30,9 +30,9 @@ const router = createBrowserRouter(
       element: <NoMatch />,
     },
   ],
-  // {
-  //   basename: "/nf-todo-app",
-  // },
+  {
+    basename: process.env.NODE_ENV === "production" ? "/nf-todo-app" : "/",
+  },
 );
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
