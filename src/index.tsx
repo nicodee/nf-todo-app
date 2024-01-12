@@ -1,35 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import ErrorPage from './error-page';
-import { CompletedTasks, ActiveTasks } from './Containers';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ErrorPage from "./error-page";
+import { CompletedTasks, ActiveTasks } from "./Containers";
+import NoMatch from "./NoMatch";
 
 const router = createBrowserRouter(
   [
     {
-      path: '/*',
+      path: "/*",
       element: <App />,
       errorElement: <ErrorPage />,
       children: [
         {
-          path: 'active',
+          path: "active",
           element: <ActiveTasks />,
         },
         {
-          path: 'complete',
+          path: "complete",
           element: <CompletedTasks />,
         },
       ],
     },
+    {
+      path: "*",
+      element: <NoMatch />,
+    },
   ],
-  {
-    basename: '/nf-todo-app',
-  },
+  // {
+  //   basename: "/nf-todo-app",
+  // },
 );
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement,
+);
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />

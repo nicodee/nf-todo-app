@@ -1,0 +1,12 @@
+{
+  "cSpell.words": ["antd", "Popconfirm", "Sider", "testid"],
+  "editor.defaultFormatter": null,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "prettier.arrowParens": "avoid",
+  "prettier.jsxSingleQuote": false,
+  "prettier.singleQuote": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
