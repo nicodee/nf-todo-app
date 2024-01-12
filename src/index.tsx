@@ -8,32 +8,27 @@ import ErrorPage from "./error-page";
 import { CompletedTasks, ActiveTasks } from "./Containers";
 import NoMatch from "./NoMatch";
 
-const router = createBrowserRouter(
-  [
-    {
-      path: "/*",
-      element: <App />,
-      errorElement: <ErrorPage />,
-      children: [
-        {
-          path: "active",
-          element: <ActiveTasks />,
-        },
-        {
-          path: "complete",
-          element: <CompletedTasks />,
-        },
-      ],
-    },
-    {
-      path: "*",
-      element: <NoMatch />,
-    },
-  ],
+const router = createBrowserRouter([
   {
-    basename: process.env.NODE_ENV === "production" ? "/nf-todo-app" : "/",
+    path: "/*",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "active",
+        element: <ActiveTasks />,
+      },
+      {
+        path: "complete",
+        element: <CompletedTasks />,
+      },
+    ],
   },
-);
+  {
+    path: "*",
+    element: <NoMatch />,
+  },
+]);
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
