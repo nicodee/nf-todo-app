@@ -28,13 +28,9 @@ const NavButton = memo(function NavButton({
 
 export const Nav = memo(function Nav() {
   const { allTasks, activeTasks, completeTasks } = useStore(state => ({
-    allTasks: Object.entries(state.tasks).length,
-    activeTasks: Object.entries(state.tasks).filter(
-      ([, task]) => !task.completed,
-    ).length,
-    completeTasks: Object.entries(state.tasks).filter(
-      ([, task]) => task.completed,
-    ).length,
+    allTasks: state.tasks.length,
+    activeTasks: state.tasks.filter(task => !task.completed).length,
+    completeTasks: state.tasks.filter(task => task.completed).length,
   }));
 
   return (

@@ -21,15 +21,14 @@ const EmptyList = () => (
 );
 
 export const TaskList = memo(function TaskList({ tasks }: { tasks: Tasks }) {
-  const _tasks = Object.entries(tasks);
   const [parent] = useAutoAnimate();
 
   return (
     <>
       <StyledScrollableDiv ref={parent}>
-        {_tasks.length === 0 && <EmptyList />}
-        {_tasks.map(([taskId, task]) => {
-          return <TaskItemContainer task={task} key={taskId} />;
+        {tasks.length === 0 && <EmptyList />}
+        {tasks.map(task => {
+          return <TaskItemContainer task={task} key={task.id} />;
         })}
       </StyledScrollableDiv>
     </>

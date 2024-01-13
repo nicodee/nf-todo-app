@@ -4,6 +4,4 @@ export type TaskType = {
   completed: boolean;
 };
 
-export type Tasks = {
-  [key: string]: TaskType;
-};
+export type Tasks = TaskType[];

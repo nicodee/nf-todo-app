@@ -5,12 +5,10 @@ import { Button, Flex } from "antd";
 export const ClearTasksButton = memo(function ClearTasksButton() {
   const { completedTasks, clearCompletedTasks } = useStore(state => ({
     clearCompletedTasks: state.clearCompletedTasks,
-    completedTasks: Object.fromEntries(
-      Object.entries(state.tasks).filter(([, task]) => task.completed),
-    ),
+    completedTasks: state.tasks.filter(task => task.completed),
   }));
 
-  const tasksLength = Object.entries(completedTasks).length;
+  const tasksLength = completedTasks.length;
   if (tasksLength === 0) return null;
   return (
     <Flex justify="center" align="center">
