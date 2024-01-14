@@ -50,7 +50,7 @@ export const TaskItemContainer = memo(function TaskItemContainer({
         onConfirm={handleDeleteTask}
         placement="topLeft"
       >
-        <Button type="text">
+        <Button type="text" data-testid="delete-task-button">
           <DeleteOutlined />
         </Button>
       </Popconfirm>,

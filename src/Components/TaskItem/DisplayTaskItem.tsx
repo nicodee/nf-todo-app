@@ -26,7 +26,8 @@ export const DisplayTaskItem = memo(function DisplayTaskItem({
 
   return (
     <Checkbox
-      data-testid={`task-item-"${task.title}`}
+      data-taskid={task.id}
+      data-testid={`task-item-${task.id}`}
       onChange={handleChange}
       checked={task.completed}
     >
