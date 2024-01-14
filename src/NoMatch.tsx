@@ -1,12 +1,13 @@
+import { Flex } from "antd";
 import { Link } from "react-router-dom";
 
 export default function NoMatch() {
   return (
-    <div id="no-match-page">
+    <Flex id="no-match-page" justify="center" align="center" vertical>
       <h1>404: Page Not Found</h1>
       <p>
-        <Link to={`/`}>Go to home page</Link>
+        <Link to={`/`}>Go back</Link>
       </p>
-    </div>
+    </Flex>
   );
 }

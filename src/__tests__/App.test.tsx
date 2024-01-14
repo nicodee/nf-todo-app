@@ -1,23 +1,14 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import App from "../App";
-import { BrowserRouter } from "react-router-dom";
 
 describe("App on initial load", () => {
   it("renders App component without crashing", () => {
-    render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>,
-    );
+    render(<App />);
   });
 
   it("renders the correct information on initial load", () => {
-    const { getByText, getByTestId, queryByTestId } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>,
-    );
+    const { getByText, getByTestId, queryByTestId } = render(<App />);
 
     expect(getByText("Todo")).toBeInTheDocument();
     expect(getByText("All Tasks: 0")).toBeInTheDocument();
@@ -31,11 +22,7 @@ describe("App on initial load", () => {
   });
 
   it("renders the correct list on nav button click", () => {
-    const { getByText, getByTestId } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>,
-    );
+    const { getByText, getByTestId } = render(<App />);
 
     fireEvent.click(getByText(/Completed/i));
     expect(getByTestId("nav-button-completed")).toHaveClass("active");
