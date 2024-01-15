@@ -10,7 +10,7 @@ type Store = {
   editTask: (taskId: string, newTaskTitle: string) => void;
   markTaskAsCompleted: (taskId: string) => void;
   markTaskAsActive: (taskId: string) => void;
-  sortTasks: (newSortedTasks: Tasks) => void;
+  moveTask: (dragIndex: number, hoverIndex: number) => void;
 };
 
 export const useStore = create(
@@ -45,10 +45,14 @@ export const useStore = create(
             task.id === taskId ? { ...task, completed: false } : task,
           ),
         })),
-      sortTasks: (newSortedTasks: Tasks) =>
-        set(() => ({
-          tasks: newSortedTasks,
-        })),
+      moveTask: (dragIndex: number, hoverIndex: number) =>
+        set(state => {
+          const newTasks = [...state.tasks];
+          const dragTask = newTasks[dragIndex];
+          newTasks.splice(dragIndex, 1);
+          newTasks.splice(hoverIndex, 0, dragTask);
+          return { tasks: newTasks };
+        }),
     }),
     {
       name: "nf-todo-app-storage",
