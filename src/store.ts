@@ -13,6 +13,24 @@ type Store = {
   moveTask: (dragIndex: number, hoverIndex: number) => void;
 };
 
+type OldStore = {
+  tasks: {
+    [key: string]: TaskType;
+  };
+  addTask: (newTask: TaskType) => void;
+  clearCompletedTasks: () => void;
+  deleteTask: (taskId: string) => void;
+  editTask: (taskId: string, newTaskTitle: string) => void;
+  markTaskAsCompleted: (taskId: string) => void;
+  markTaskAsActive: (taskId: string) => void;
+  moveTask: (dragIndex: number, hoverIndex: number) => void;
+};
+
+const migrateStateFromV0 = (oldState: OldStore) => {
+  const tasks = Object.values(oldState.tasks);
+  return { tasks };
+};
+
 export const useStore = create(
   persist<Store>(
     set => ({
@@ -57,6 +75,14 @@ export const useStore = create(
     {
       name: "nf-todo-app-storage",
       storage: createJSONStorage(() => localStorage),
+      version: 1,
+      migrate(persistedState: unknown, version) {
+        if (version === 0) {
+          const migratedState = migrateStateFromV0(persistedState as OldStore);
+          return { ...(persistedState as OldStore), ...migratedState };
+        }
+        return persistedState as Store;
+      },
     },
   ),
 );
