@@ -23,7 +23,6 @@ const EmptyList = () => (
 );
 
 export const TaskList = memo(function TaskList({ tasks }: { tasks: Tasks }) {
-  const { sortTasks } = useStore();
   const [_tasks, setTasks] = useState(tasks);
   const [parent] = useAutoAnimate();
 
@@ -37,9 +36,8 @@ export const TaskList = memo(function TaskList({ tasks }: { tasks: Tasks }) {
           ],
         }),
       );
-      sortTasks(_tasks);
     },
-    [_tasks, sortTasks],
+    [_tasks],
   );
 
   const renderTaskItem = useCallback(

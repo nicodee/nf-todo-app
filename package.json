@@ -17,9 +17,7 @@
     "immutability-helper": "^3.1.1",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
-    "react-dnd-cjs": "^9.5.1",
     "react-dnd-html5-backend": "^16.0.1",
-    "react-dnd-html5-backend-cjs": "^9.5.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",
@@ -31,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"/node_modules/(?!@react-dnd|react-dnd|dnd-core|react-dnd-html5-backend)\"",
     "eject": "react-scripts eject",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx src/",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|tsx)\""
@@ -62,15 +60,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^27.5.1",
     "prettier": "^3.1.1"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!(@formkit/auto-animate)).+\\.(js|jsx|mjs|cjs|ts|tsx)$"
-    ],
-    "moduleNameMapper": {
-      "react-dnd": "react-dnd-cjs",
-      "react-dnd-html5-backend": "react-dnd-html5-backend-cjs",
-      "dnd-core": "dnd-core-cjs"
-    }
   }
 }

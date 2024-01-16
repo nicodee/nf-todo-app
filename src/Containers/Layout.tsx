@@ -7,7 +7,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-export default function LayoutWrapper() {
+function LayoutWrapper() {
   const [parent] = useAutoAnimate();
   return (
     <Layout>
@@ -22,12 +22,14 @@ export default function LayoutWrapper() {
           size="large"
         >
           <DndProvider backend={HTML5Backend}>
-            <span ref={parent}>
+            <div ref={parent}>
               <Outlet />
-            </span>
+            </div>
           </DndProvider>
         </StyledList>
       </Layout.Content>
     </Layout>
   );
 }
+
+export default LayoutWrapper;
