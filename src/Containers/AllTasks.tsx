@@ -1,10 +1,39 @@
-import { memo } from "react";
-import { TaskList } from "../Components/TaskList";
+import { memo, useCallback } from "react";
 
 import { useStore } from "../store";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import EmptyList from "../Components/EmptyList";
+import { TaskItemContainer } from "../Components/TaskItem";
+import { StyledScrollableDiv } from "../styles";
+import { TaskType } from "../types";
 
 export const AllTasks = memo(function AllTasks() {
-  const { tasks } = useStore();
+  const { tasks, moveTask } = useStore();
+  const [parent] = useAutoAnimate();
 
-  return <TaskList tasks={tasks} />;
+  const renderTaskItem = useCallback(
+    (task: TaskType, index: number) => {
+      return (
+        <TaskItemContainer
+          key={task.id}
+          id={task.id}
+          task={task}
+          index={index}
+          moveTask={moveTask}
+        />
+      );
+    },
+    [moveTask],
+  );
+
+  return (
+    <>
+      <StyledScrollableDiv ref={parent}>
+        {tasks.length === 0 && <EmptyList />}
+        {tasks.map((task, index) => {
+          return renderTaskItem(task, index);
+        })}
+      </StyledScrollableDiv>
+    </>
+  );
 });

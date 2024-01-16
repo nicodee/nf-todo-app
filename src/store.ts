@@ -10,53 +10,49 @@ type Store = {
   editTask: (taskId: string, newTaskTitle: string) => void;
   markTaskAsCompleted: (taskId: string) => void;
   markTaskAsActive: (taskId: string) => void;
+  moveTask: (dragIndex: number, hoverIndex: number) => void;
 };
 
 export const useStore = create(
   persist<Store>(
-    (set, get) => ({
-      tasks: {},
+    set => ({
+      tasks: [],
       addTask: (newTask: TaskType) =>
-        set(state => ({ tasks: { ...state.tasks, [newTask.id]: newTask } })),
+        set(state => ({ tasks: [...state.tasks, newTask] })),
       clearCompletedTasks: () =>
         set(state => ({
-          tasks: Object.fromEntries(
-            Object.entries(state.tasks).filter(([_, task]) => !task.completed),
-          ),
+          tasks: state.tasks.filter(task => !task.completed),
         })),
       deleteTask: (taskId: string) =>
         set(state => ({
-          tasks: Object.fromEntries(
-            Object.entries(state.tasks).filter(([id, _]) => id !== taskId),
-          ),
+          tasks: state.tasks.filter(task => task.id !== taskId),
         })),
       editTask: (taskId: string, newTaskTitle: string) =>
         set(state => ({
-          tasks: {
-            ...state.tasks,
-            [taskId]: { ...state.tasks[taskId], title: newTaskTitle },
-          },
+          tasks: state.tasks.map(task =>
+            task.id === taskId ? { ...task, title: newTaskTitle } : task,
+          ),
         })),
       markTaskAsCompleted: (taskId: string) =>
         set(state => ({
-          tasks: {
-            ...state.tasks,
-            [taskId]: {
-              ...state.tasks[taskId],
-              completed: true,
-            },
-          },
+          tasks: state.tasks.map(task =>
+            task.id === taskId ? { ...task, completed: true } : task,
+          ),
         })),
       markTaskAsActive: (taskId: string) =>
         set(state => ({
-          tasks: {
-            ...state.tasks,
-            [taskId]: {
-              ...state.tasks[taskId],
-              completed: false,
-            },
-          },
+          tasks: state.tasks.map(task =>
+            task.id === taskId ? { ...task, completed: false } : task,
+          ),
         })),
+      moveTask: (dragIndex: number, hoverIndex: number) =>
+        set(state => {
+          const newTasks = [...state.tasks];
+          const dragTask = newTasks[dragIndex];
+          newTasks.splice(dragIndex, 1);
+          newTasks.splice(hoverIndex, 0, dragTask);
+          return { tasks: newTasks };
+        }),
     }),
     {
       name: "nf-todo-app-storage",

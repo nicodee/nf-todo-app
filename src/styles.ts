@@ -28,7 +28,8 @@ export const StyledListWrapper = styles.div`
 
 export const StyledScrollableDiv = styles.div`
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export const StyledListItem = styles(List.Item)`

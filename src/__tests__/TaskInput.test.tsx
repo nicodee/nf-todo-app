@@ -24,4 +24,17 @@ describe("TaskInput", () => {
     fireEvent.change(inputElement, { target: { value: "New Task" } });
     expect(inputElement).toHaveValue("New Task");
   });
+
+  it("clears the input field when the form is submitted", () => {
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <TaskInput />
+      </BrowserRouter>,
+    );
+    const inputElement = getByTestId("task-input");
+    fireEvent.change(inputElement, { target: { value: "New Task" } });
+    expect(inputElement).toHaveValue("New Task");
+    fireEvent.keyDown(inputElement, { key: "Enter", code: "Enter" });
+    expect(inputElement).toHaveValue("");
+  });
 });

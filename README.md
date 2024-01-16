@@ -14,3 +14,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Launches the test runner in the interactive watch mode.
 
+NB: Install `jest` and `ts-node` if you don't have them
+
+`npm install jest`
+
+`npm install ts-node`
+

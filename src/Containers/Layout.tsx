@@ -4,8 +4,10 @@ import { Layout, Typography } from "antd";
 import { Header } from "../Components/Header";
 import { ClearTasksButton } from "../Components/ClearTasksButton";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
-export default function LayoutWrapper() {
+function LayoutWrapper() {
   const [parent] = useAutoAnimate();
   return (
     <Layout>
@@ -19,11 +21,15 @@ export default function LayoutWrapper() {
           footer={<ClearTasksButton />}
           size="large"
         >
-          <span ref={parent}>
-            <Outlet />
-          </span>
+          <DndProvider backend={HTML5Backend}>
+            <div ref={parent}>
+              <Outlet />
+            </div>
+          </DndProvider>
         </StyledList>
       </Layout.Content>
     </Layout>
   );
 }
+
+export default LayoutWrapper;
